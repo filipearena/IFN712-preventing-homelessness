@@ -1,15 +1,8 @@
 import * as types from './types';
 
-export function showLoading() {
-    return {
-        type: types.LOAD_TRUE
-    }
-}
-
-export function hideLoading() {
-    return (dispatch, getState) => {
-        dispatch({
-            type: types.LOAD_FALSE
-        })
-    }
-}
+export const exempleAction = ({ newText }) => (dispatch, getState) => {
+  dispatch({
+    type: types.UPDATE_STATE,
+    newText,
+  });
+};

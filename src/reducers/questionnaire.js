@@ -6,11 +6,11 @@ const initialState = {
 };
 
 export const questionnaire = createReducer(initialState, {
-  [types.GET_VIRTUAL_VIDEO_SESSIONS_LIST_SUCCESS](state, action) {
-    const { videoSessionsList } = action;
+  [types.UPDATE_STATE](state, action) {
+    const { newText } = action;
     return {
       ...state,
-      videoSessionsList,
+      test: newText,
     };
   },
 });

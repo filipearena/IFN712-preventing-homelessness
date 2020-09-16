@@ -1,26 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { exempleAction } from './actions';
 
-export class App extends React.Component {
-  render() {
-    const { test } = this.props;
-    return <div>{test}</div>;
-  }
+function Questionnaire({ onUpdate, test }) {
+  const handleOnPress = () => {
+    onUpdate({ newText: 'UPDATED' });
+  };
+  return (
+    <div>
+      <button type="button" onClick={() => handleOnPress()}>
+        update state
+      </button>
+      <span>{test}</span>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
+  console.log('state', state);
   return {
     test: state.questionnaire.test,
   };
 };
 
-const mapDispatchToProps = {
-  // nextPage,
-  // previousPage,
-  // setTableData,
-  // setLoading,
-};
-
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default AppContainer;
+export default connect(mapStateToProps, {
+  onUpdate: exempleAction,
+})(Questionnaire);
