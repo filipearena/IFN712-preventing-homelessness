@@ -1,8 +1,8 @@
 import * as types from './types';
 
-export const exempleAction = ({ newText }) => (dispatch, getState) => {
+export const saveState = (newFields) => (dispatch, getState) => {
   dispatch({
     type: types.UPDATE_STATE,
-    newText,
+    newFields,
   });
 };

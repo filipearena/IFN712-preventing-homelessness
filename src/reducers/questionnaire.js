@@ -2,15 +2,19 @@ import { createReducer } from 'redux-create-reducer';
 import * as types from '../types';
 
 const initialState = {
-  test: 'this is comming from the state',
+  gender: 'female',
+  password: '',
+  email: '',
+  authorized: false,
 };
 
 export const questionnaire = createReducer(initialState, {
   [types.UPDATE_STATE](state, action) {
-    const { newText } = action;
+    console.log('action', action);
+    const { newFields } = action;
     return {
       ...state,
-      test: newText,
+      ...newFields,
     };
   },
 });
