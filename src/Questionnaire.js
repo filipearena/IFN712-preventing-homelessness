@@ -103,17 +103,20 @@ function Questionnaire({ onSubmit }) {
               <FormControlLabel value="other" control={<Radio color="primary" />} label="Other" />
             </RadioGroup>
           </FormControl>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={values.authorized}
-                onChange={handleChangeCheckbox}
-                name="authorized"
-                color="primary"
-              />
-            }
-            label="Primary"
-          />
+          <FormControl component="fieldset" fullWidth>
+            <FormLabel component="legend">Authorized</FormLabel>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={values.authorized}
+                  onChange={handleChangeCheckbox}
+                  name="authorized"
+                  color="primary"
+                />
+              }
+              label="Primary"
+            />
+          </FormControl>
           <Button type="submit" fullWidth variant="contained" className={classes.submit}>
             Sign In
           </Button>
