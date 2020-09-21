@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { useForm, Controller } from 'react-hook-form';
-import { RadioGroup, Button, FormControl, FormLabel, Radio } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +9,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import { saveState } from './actions';
+import CustomRadioGroup from './components/CustomRadioGroup';
+import CustomCheckbox from './components/CustomCheckbox';
+import CustomTextField from './components/CustomTextField';
+import CustomHelperLink from './components/CustomHelperLink';
+import CustomTitle from './components/CustomTitle';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const GENDER = [
+  { key: 1, value: 'female', label: 'Female' },
+  { key: 2, value: 'male', label: 'Male' },
+];
+
 function Questionnaire({ onSubmit, navigate }) {
   const history = useHistory();
   const classes = useStyles();
@@ -50,6 +56,8 @@ function Questionnaire({ onSubmit, navigate }) {
   };
 
   const handleChangeCheckbox = (event) => {
+    console.log('event.target.name', event.target.name);
+    console.log('event.target.checked', event.target.checked);
     setValues({ ...values, [event.target.name]: event.target.checked });
   };
 
@@ -65,76 +73,26 @@ function Questionnaire({ onSubmit, navigate }) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
+        <CustomTitle title="Section1" />
         <form className={classes.form} onSubmit={next}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
+          <CustomTextField id="email" name="email" label="Email" onChange={handleChange} />
+          <CustomRadioGroup
+            label="What is your income?"
+            name="gender"
+            value={values.gender}
             onChange={handleChange}
-            autoComplete="email"
-            autoFocus
+            options={GENDER}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            onChange={handleChange}
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+          <CustomCheckbox
+            name="authorized"
+            label="Authorized"
+            checked={values.authorized}
+            onChange={handleChangeCheckbox}
           />
-          <FormControl component="fieldset" fullWidth>
-            <FormLabel component="legend">Gender</FormLabel>
-            <RadioGroup
-              aria-label="gender"
-              name="gender"
-              value={values.gender}
-              onChange={handleChange}
-            >
-              <FormControlLabel value="female" control={<Radio color="primary" />} label="Female" />
-              <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" />
-              <FormControlLabel value="other" control={<Radio color="primary" />} label="Other" />
-            </RadioGroup>
-          </FormControl>
-          <FormControl component="fieldset" fullWidth>
-            <FormLabel component="legend">Authorized</FormLabel>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={values.authorized}
-                  onChange={handleChangeCheckbox}
-                  name="authorized"
-                  color="primary"
-                />
-              }
-              label="Primary"
-            />
-          </FormControl>
+          <CustomHelperLink message="Need Help?" link="https://www.uol.com.br" />
           <Button type="submit" fullWidth variant="contained" className={classes.submit}>
-            Sign In
+            Next
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
     </Container>
