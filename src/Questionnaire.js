@@ -14,6 +14,7 @@ import CustomCheckbox from './components/CustomCheckbox';
 import CustomTextField from './components/CustomTextField';
 import CustomHelperLink from './components/CustomHelperLink';
 import CustomTitle from './components/CustomTitle';
+import FormGenerator from './components/FormGenerator';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,20 +36,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GENDER = [
-  { key: 1, value: 'female', label: 'Female' },
-  { key: 2, value: 'male', label: 'Male' },
-];
-
 function Questionnaire({ onSubmit, navigate }) {
   const history = useHistory();
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    gender: 'female',
-    password: '',
-    email: '',
-    authorized: false,
+    salaryOne: '0',
+    salaryTwo: '1000',
   });
 
   const handleChange = (event) => {
@@ -56,18 +50,45 @@ function Questionnaire({ onSubmit, navigate }) {
   };
 
   const handleChangeCheckbox = (event) => {
-    console.log('event.target.name', event.target.name);
-    console.log('event.target.checked', event.target.checked);
     setValues({ ...values, [event.target.name]: event.target.checked });
   };
 
   const next = (event) => {
     event.preventDefault();
-    console.log('values before next step', values);
-    console.log('got to next step');
     onSubmit(values);
     history.push('/questionnaireTwo');
   };
+
+  const Form = [
+    {
+      label: 'What is your income?',
+      name: 'salaryOne',
+      type: 'radio',
+      onChange: handleChange,
+      value: values.salaryOne,
+      options: [
+        {
+          value: '0',
+          label: 'None',
+        },
+        { value: '1000', label: '5 - 1000' },
+      ],
+    },
+    {
+      label: 'What is your income?',
+      name: 'salaryTwo',
+      type: 'radio',
+      value: values.salaryTwo,
+      onChange: handleChange,
+      options: [
+        {
+          value: '0',
+          label: 'None',
+        },
+        { value: '1000', label: '5 - 1000' },
+      ],
+    },
+  ];
 
   return (
     <Container component="main" maxWidth="xs">
@@ -75,27 +96,7 @@ function Questionnaire({ onSubmit, navigate }) {
       <div className={classes.paper}>
         <CustomTitle title="Section1" />
         <form className={classes.form} onSubmit={next}>
-          <CustomTextField
-            id="email"
-            name="email"
-            label="Email"
-            onChange={handleChange}
-            isRequired={false}
-          />
-          <CustomRadioGroup
-            label="What is your income?"
-            name="gender"
-            value={values.gender}
-            onChange={handleChange}
-            options={GENDER}
-          />
-          <CustomCheckbox
-            name="authorized"
-            label="Authorized"
-            checked={values.authorized}
-            onChange={handleChangeCheckbox}
-          />
-          <CustomHelperLink message="Need Help?" link="https://www.uol.com.br" />
+          <FormGenerator form={Form} />
           <Button type="submit" fullWidth variant="contained" className={classes.submit}>
             Next
           </Button>

@@ -10,8 +10,8 @@ function CustomRadioGroup({ label, name, value, onChange, options }) {
     <FormControl component="fieldset" fullWidth>
       <FormLabel component="legend">{label}</FormLabel>
       <RadioGroup name={name} value={value} onChange={onChange}>
-        {options.map((props) => (
-          <Option {...props} />
+        {options.map((props, index) => (
+          <Option key={index} {...props} />
         ))}
       </RadioGroup>
     </FormControl>
