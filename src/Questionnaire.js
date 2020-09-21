@@ -75,7 +75,13 @@ function Questionnaire({ onSubmit, navigate }) {
       <div className={classes.paper}>
         <CustomTitle title="Section1" />
         <form className={classes.form} onSubmit={next}>
-          <CustomTextField id="email" name="email" label="Email" onChange={handleChange} />
+          <CustomTextField
+            id="email"
+            name="email"
+            label="Email"
+            onChange={handleChange}
+            isRequired={false}
+          />
           <CustomRadioGroup
             label="What is your income?"
             name="gender"
