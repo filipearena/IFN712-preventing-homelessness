@@ -41,8 +41,9 @@ function Questionnaire({ onSubmit, navigate }) {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    salaryOne: '0',
-    salaryTwo: '1000',
+    age: '1',
+    salary: '1',
+    liveAlone: '1',
   });
 
   const handleChange = (event) => {
@@ -61,31 +62,58 @@ function Questionnaire({ onSubmit, navigate }) {
 
   const Form = [
     {
-      label: 'What is your income?',
-      name: 'salaryOne',
+      label: 'What is your age?',
+      name: 'age',
       type: 'radio',
       onChange: handleChange,
-      value: values.salaryOne,
+      value: values.age,
       options: [
         {
-          value: '0',
-          label: 'None',
+          value: '1',
+          label: '60-64',
         },
-        { value: '1000', label: '5 - 1000' },
+        {
+          value: '2',
+          label: '65-70',
+        },
+        {
+          value: '3',
+          label: '71-75',
+        },
+        {
+          value: '4',
+          label: '76-80',
+        },
       ],
     },
     {
-      label: 'What is your income?',
-      name: 'salaryTwo',
+      label: 'What is your monthly income?',
+      name: 'salary',
       type: 'radio',
-      value: values.salaryTwo,
+      value: values.salary,
       onChange: handleChange,
       options: [
         {
-          value: '0',
+          value: '1',
           label: 'None',
         },
-        { value: '1000', label: '5 - 1000' },
+        { value: '2', label: '0 - 1,000 AU$' },
+        { value: '3', label: '1,000 - 2,000 AU$' },
+        { value: '4', label: '3,000 - 4,000 AU$' },
+      ],
+    },
+    {
+      label: 'Do you live alone?',
+      name: 'liveAlone',
+      type: 'radio',
+      value: values.liveAlone,
+      onChange: handleChange,
+      options: [
+        {
+          value: '1',
+          label: 'Yes',
+        },
+        { value: '2', label: 'No' },
       ],
     },
   ];
@@ -94,7 +122,7 @@ function Questionnaire({ onSubmit, navigate }) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <CustomTitle title="Section1" />
+        <CustomTitle title="Profile" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
           <Button type="submit" fullWidth variant="contained" className={classes.submit}>
