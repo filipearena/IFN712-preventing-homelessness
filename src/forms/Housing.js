@@ -8,13 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
-import { saveState } from './actions';
-import CustomRadioGroup from './components/CustomRadioGroup';
-import CustomCheckbox from './components/CustomCheckbox';
-import CustomTextField from './components/CustomTextField';
-import CustomHelperLink from './components/CustomHelperLink';
-import CustomTitle from './components/CustomTitle';
-import FormGenerator from './components/FormGenerator';
+import { saveState } from '../actions';
+import CustomRadioGroup from '../components/CustomRadioGroup';
+import CustomCheckbox from '../components/CustomCheckbox';
+import CustomTextField from '../components/CustomTextField';
+import CustomHelperLink from '../components/CustomHelperLink';
+import CustomTitle from '../components/CustomTitle';
+import FormGenerator from '../components/FormGenerator';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,85 +36,73 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Questionnaire({ onSubmit, navigate }) {
+function Housing({ onSubmit, state }) {
   const history = useHistory();
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    age: '1',
-    salary: '1',
-    liveAlone: '1',
+    housing: state.questionnaire.housing || '',
+    loan: state.questionnaire.loan || '',
   });
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handleChangeCheckbox = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.checked });
-  };
-
   const next = (event) => {
     event.preventDefault();
     onSubmit(values);
-    history.push('/questionnaireTwo');
+    history.push('/relationship');
+  };
+
+  const goBack = () => {
+    history.goBack();
   };
 
   const Form = [
     {
-      label: 'What is your age?',
-      name: 'age',
+      label: 'What is your housing condition?',
+      name: 'housing',
       type: 'radio',
       onChange: handleChange,
-      value: values.age,
+      value: values.housing,
       options: [
         {
           value: '1',
-          label: '60-64',
+          label: 'Own a house',
         },
         {
           value: '2',
-          label: '65-70',
+          label: 'Renting',
         },
         {
           value: '3',
-          label: '71-75',
+          label: 'Staying with friends or family',
         },
         {
           value: '4',
-          label: '76-80',
+          label: 'Using Supported Residential Service',
         },
-      ],
-    },
-    {
-      label: 'What is your monthly income?',
-      name: 'salary',
-      type: 'radio',
-      value: values.salary,
-      onChange: handleChange,
-      options: [
         {
-          value: '1',
-          label: 'None',
+          value: '5',
+          label: 'Staying in temporary accomodation',
         },
-        { value: '2', label: '0 - 1,000 AU$' },
-        { value: '3', label: '1,000 - 2,000 AU$' },
-        { value: '4', label: '3,000 - 4,000 AU$' },
       ],
     },
     {
-      label: 'Do you live alone?',
-      name: 'liveAlone',
+      label: 'Did you take a loan/mortgage to pay for it?',
+      name: 'loan',
       type: 'radio',
-      value: values.liveAlone,
+      value: values.loan,
       onChange: handleChange,
       options: [
         {
           value: '1',
           label: 'Yes',
         },
-        { value: '2', label: 'No' },
+        { value: '0', label: 'No' },
       ],
+      show: values.housing === '1',
     },
   ];
 
@@ -122,7 +110,7 @@ function Questionnaire({ onSubmit, navigate }) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <CustomTitle title="Profile" />
+        <CustomTitle title="Housing" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
           <Button type="submit" fullWidth variant="contained" className={classes.submit}>
@@ -135,9 +123,11 @@ function Questionnaire({ onSubmit, navigate }) {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    state,
+  };
 };
 
 export default connect(mapStateToProps, {
   onSubmit: saveState,
-})(Questionnaire);
+})(Housing);

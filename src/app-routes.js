@@ -1,4 +1,5 @@
 export const APP_ROUTES = {
-  questionnaire: '/questionnaire',
-  questionnaireTwo: '/questionnaireTwo',
+  housing: '/housing',
+  relationship: '/relationship',
+  financial: '/financial',
 };

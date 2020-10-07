@@ -1,14 +1,20 @@
 import React from 'react';
 import CustomRadioGroup from './CustomRadioGroup';
-import CustomCheckbox from './CustomCheckbox';
+// import CustomCheckbox from './CustomCheckbox';
+import CustomCurrencyInput from './CustomCurrencyInput';
 
-function GenerateCustomComponent(props) {
-  if (props.type === 'radio') {
+function GenerateCustomComponent({ show, ...props }) {
+  const { type } = props;
+  if (type === 'radio' && show) {
     return <CustomRadioGroup {...props} />;
   }
-  if (props.type === 'checkbox') {
-    return <CustomCheckbox {...props} />;
+  // if (type === 'checkbox' && show) {
+  //   return <CustomCheckbox {...props} />;
+  // }
+  if (type === 'currencyInput' && show) {
+    return <CustomCurrencyInput {...props} />;
   }
+  return null;
 }
 
 function FormGenerator({ form }) {
@@ -20,5 +26,9 @@ function FormGenerator({ form }) {
     </>
   );
 }
+
+GenerateCustomComponent.defaultProps = {
+  show: true,
+};
 
 export default FormGenerator;

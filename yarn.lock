@@ -1787,6 +1787,13 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
+"@unicef/material-ui-currency-textfield@^0.8.6":
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/@unicef/material-ui-currency-textfield/-/material-ui-currency-textfield-0.8.6.tgz#a14e33a134a894e8e799cf6cec002864dceb541b"
+  integrity sha512-zXhwJbz8mRa4xVZ6zkkyn9UyXHT4CXFn1JuvkVhDFqtqPkjQXBg+/dWMlJAfX6m1CvwfxwiF9giJxJqFEsTUqg==
+  dependencies:
+    autonumeric "^4.5.4"
+
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.8.5.tgz#51b1c5fe6576a34953bf4b253df9f0d490d9e359"
@@ -2324,6 +2331,11 @@ atob@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+
+autonumeric@^4.5.4:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/autonumeric/-/autonumeric-4.6.0.tgz#6b87240f060b2d33e36b0c8de5ba7a5ed67a38d4"
+  integrity sha512-bYnD2oD9UMZBTxSWcvXH1MTcp0w+CUBfXe4HI1QJLGzJu+O27Ny5gqzRcFuDsZB9jrZ5SJjqAG0PieJsaUdTcg==
 
 autoprefixer@^9.6.1:
   version "9.7.4"
@@ -9886,6 +9898,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+reselect@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
+  integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
