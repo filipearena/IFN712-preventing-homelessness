@@ -7,7 +7,7 @@ function Option({ value, label }) {
 
 function CustomRadioGroup({ label, name, value, onChange, options }) {
   return (
-    <FormControl component="fieldset" fullWidth>
+    <FormControl component="fieldset" fullWidth style={{ marginBottom: 15 }}>
       <FormLabel component="legend">{label}</FormLabel>
       <RadioGroup name={name} value={value} onChange={onChange}>
         {options.map((props, index) => (
