@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: 'blue',
+    color: 'white',
   },
 }));
 
@@ -46,7 +48,11 @@ function Housing({ onSubmit, state }) {
   });
 
   const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+    if (event.target.name === 'housing') {
+      setValues({ [event.target.name]: event.target.value, loan: '' });
+    } else {
+      setValues({ ...values, [event.target.name]: event.target.value });
+    }
   };
 
   const next = (event) => {
@@ -59,6 +65,13 @@ function Housing({ onSubmit, state }) {
     history.goBack();
   };
 
+  const disableSubmit = () => {
+    if (values.housing !== '1') {
+      return values.housing.length === 0;
+    }
+    return values.loan.length === 0;
+  };
+
   const Form = [
     {
       label: 'What is your housing condition?',
@@ -66,6 +79,7 @@ function Housing({ onSubmit, state }) {
       type: 'radio',
       onChange: handleChange,
       value: values.housing,
+      required: true,
       options: [
         {
           value: '1',
@@ -95,6 +109,7 @@ function Housing({ onSubmit, state }) {
       type: 'radio',
       value: values.loan,
       onChange: handleChange,
+      required: true,
       options: [
         {
           value: '1',
@@ -113,7 +128,13 @@ function Housing({ onSubmit, state }) {
         <CustomTitle title="Housing" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
-          <Button type="submit" fullWidth variant="contained" className={classes.submit}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            className={classes.submit}
+            disabled={disableSubmit()}
+          >
             Next
           </Button>
         </form>

@@ -33,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: 'blue',
+    color: 'white',
+  },
+  backButton: {
+    backgroundColor: 'grey',
+    color: 'black',
   },
 }));
 
@@ -46,7 +52,18 @@ function RelationShip({ onSubmit, state }) {
   });
 
   const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+    if (event.target.name === 'single') {
+      setValues({ [event.target.name]: event.target.value, partnerHelps: '' });
+    } else {
+      setValues({ ...values, [event.target.name]: event.target.value });
+    }
+  };
+
+  const disableSubmit = () => {
+    if (values.single === '0') {
+      return values.partnerHelps.length === 0;
+    }
+    return values.single.length === 0;
   };
 
   const next = (event) => {
@@ -101,10 +118,16 @@ function RelationShip({ onSubmit, state }) {
         <CustomTitle title="Relationship" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
-          <Button type="submit" fullWidth variant="contained" className={classes.submit}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            className={classes.submit}
+            disabled={disableSubmit()}
+          >
             Next
           </Button>
-          <Button onClick={() => goBack()} className={classes.submit}>
+          <Button onClick={() => goBack()} className={classes.backButton}>
             Back
           </Button>
         </form>
