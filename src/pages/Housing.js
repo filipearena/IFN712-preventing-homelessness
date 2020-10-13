@@ -42,64 +42,78 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RelationShip({ onSubmit, state }) {
+function Housing({ onSubmit, state }) {
   const history = useHistory();
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    single: state.questionnaire.single || '',
-    partnerHelps: state.questionnaire.partnerHelps || '',
+    housing: state.questionnaire.housing || '',
+    loan: state.questionnaire.loan || '',
   });
 
   const handleChange = (event) => {
-    if (event.target.name === 'single') {
-      setValues({ [event.target.name]: event.target.value, partnerHelps: '' });
+    if (event.target.name === 'housing') {
+      setValues({ [event.target.name]: event.target.value, loan: '' });
     } else {
       setValues({ ...values, [event.target.name]: event.target.value });
     }
   };
 
-  const disableSubmit = () => {
-    if (values.single === '0') {
-      return values.partnerHelps.length === 0;
-    }
-    return values.single.length === 0;
-  };
-
   const next = (event) => {
     event.preventDefault();
     onSubmit(values);
-    history.push('/financial');
+    history.push('/relationship');
   };
 
   const goBack = () => {
     history.goBack();
   };
 
+  const disableSubmit = () => {
+    if (values.housing !== '1') {
+      return values.housing.length === 0;
+    }
+    return values.loan.length === 0;
+  };
+
   const Form = [
     {
-      label: 'Are you single?',
-      name: 'single',
+      label: 'What is your housing condition?',
+      name: 'housing',
       type: 'radio',
       onChange: handleChange,
-      value: values.single,
+      value: values.housing,
+      required: true,
       options: [
         {
-          value: '0',
-          label: 'No',
+          value: '1',
+          label: 'Own a house',
         },
         {
-          value: '1',
-          label: 'Yes',
+          value: '2',
+          label: 'Renting',
+        },
+        {
+          value: '3',
+          label: 'Staying with friends or family',
+        },
+        {
+          value: '4',
+          label: 'Using Supported Residential Service',
+        },
+        {
+          value: '5',
+          label: 'Staying in temporary accomodation',
         },
       ],
     },
     {
-      label: 'Does your partner help with the income?',
-      name: 'partnerHelps',
+      label: 'Did you take a loan/mortgage to pay for it?',
+      name: 'loan',
       type: 'radio',
-      value: values.partnerHelps,
+      value: values.loan,
       onChange: handleChange,
+      required: true,
       options: [
         {
           value: '1',
@@ -107,15 +121,14 @@ function RelationShip({ onSubmit, state }) {
         },
         { value: '0', label: 'No' },
       ],
-      show: values.single === '0',
+      show: values.housing === '1',
     },
   ];
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
-        <CustomTitle title="Relationship" />
+        <CustomTitle title="Housing" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
           <Button
@@ -137,9 +150,11 @@ function RelationShip({ onSubmit, state }) {
 }
 
 const mapStateToProps = (state) => {
-  return { state };
+  return {
+    state,
+  };
 };
 
 export default connect(mapStateToProps, {
   onSubmit: saveState,
-})(RelationShip);
+})(Housing);

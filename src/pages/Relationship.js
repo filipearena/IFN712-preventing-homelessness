@@ -36,80 +36,70 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'blue',
     color: 'white',
   },
+  backButton: {
+    backgroundColor: 'grey',
+    color: 'black',
+  },
 }));
 
-function Housing({ onSubmit, state }) {
+function RelationShip({ onSubmit, state }) {
   const history = useHistory();
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    housing: state.questionnaire.housing || '',
-    loan: state.questionnaire.loan || '',
+    single: state.questionnaire.single || '',
+    partnerHelps: state.questionnaire.partnerHelps || '',
   });
 
   const handleChange = (event) => {
-    if (event.target.name === 'housing') {
-      setValues({ [event.target.name]: event.target.value, loan: '' });
+    if (event.target.name === 'single') {
+      setValues({ [event.target.name]: event.target.value, partnerHelps: '' });
     } else {
       setValues({ ...values, [event.target.name]: event.target.value });
     }
   };
 
+  const disableSubmit = () => {
+    if (values.single === '0') {
+      return values.partnerHelps.length === 0;
+    }
+    return values.single.length === 0;
+  };
+
   const next = (event) => {
     event.preventDefault();
     onSubmit(values);
-    history.push('/relationship');
+    history.push('/financial');
   };
 
   const goBack = () => {
     history.goBack();
   };
 
-  const disableSubmit = () => {
-    if (values.housing !== '1') {
-      return values.housing.length === 0;
-    }
-    return values.loan.length === 0;
-  };
-
   const Form = [
     {
-      label: 'What is your housing condition?',
-      name: 'housing',
+      label: 'Are you single?',
+      name: 'single',
       type: 'radio',
       onChange: handleChange,
-      value: values.housing,
-      required: true,
+      value: values.single,
       options: [
         {
           value: '1',
-          label: 'Own a house',
+          label: 'Yes',
         },
         {
-          value: '2',
-          label: 'Renting',
-        },
-        {
-          value: '3',
-          label: 'Staying with friends or family',
-        },
-        {
-          value: '4',
-          label: 'Using Supported Residential Service',
-        },
-        {
-          value: '5',
-          label: 'Staying in temporary accomodation',
+          value: '0',
+          label: 'No',
         },
       ],
     },
     {
-      label: 'Did you take a loan/mortgage to pay for it?',
-      name: 'loan',
+      label: 'Does your partner help with the income?',
+      name: 'partnerHelps',
       type: 'radio',
-      value: values.loan,
+      value: values.partnerHelps,
       onChange: handleChange,
-      required: true,
       options: [
         {
           value: '1',
@@ -117,15 +107,14 @@ function Housing({ onSubmit, state }) {
         },
         { value: '0', label: 'No' },
       ],
-      show: values.housing === '1',
+      show: values.single === '0',
     },
   ];
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
-        <CustomTitle title="Housing" />
+        <CustomTitle title="Relationship" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
           <Button
@@ -137,6 +126,9 @@ function Housing({ onSubmit, state }) {
           >
             Next
           </Button>
+          <Button onClick={() => goBack()} className={classes.backButton}>
+            Back
+          </Button>
         </form>
       </div>
     </Container>
@@ -144,11 +136,9 @@ function Housing({ onSubmit, state }) {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    state,
-  };
+  return { state };
 };
 
 export default connect(mapStateToProps, {
   onSubmit: saveState,
-})(Housing);
+})(RelationShip);

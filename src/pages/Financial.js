@@ -31,6 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: 'blue',
+    color: 'white',
+  },
+  backButton: {
+    backgroundColor: 'grey',
+    color: 'black',
   },
 }));
 
@@ -40,20 +46,28 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
 
   const [values, setValues] = React.useState({
     haveWork: state.questionnaire.haveWork || '',
-    incomeWork: state.questionnaire.incomeWork || 0,
+    incomeWork: state.questionnaire.incomeWork || '0.00',
     haveSuper: state.questionnaire.haveSuper || '',
-    incomeSupper: state.questionnaire.incomeSupper || 0,
+    incomeSupper: state.questionnaire.incomeSupper || '0.00',
     haveAgedPension: state.questionnaire.haveAgedPension || '',
-    incomeAgedPension: state.questionnaire.incomeAgedPension || 0,
+    incomeAgedPension: state.questionnaire.incomeAgedPension || '0.00',
     haveFamilySupport: state.questionnaire.haveFamilySupport || '',
     haveDependants: state.questionnaire.haveDependants || '',
     inDebt: state.questionnaire.inDebt || '',
-    payForRent: state.questionnaire.payForRent || 0,
-    payForLoanOrMortgage: state.questionnaire.payForLoanOrMortgage || 0,
+    payForRent: state.questionnaire.payForRent || '0.00',
+    payForLoanOrMortgage: state.questionnaire.payForLoanOrMortgage || '0.00',
   });
 
   const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+    if (event.target.name === 'haveWork') {
+      setValues({ ...values, [event.target.name]: event.target.value, incomeWork: '0.00' });
+    } else if (event.target.name === 'haveSuper') {
+      setValues({ ...values, [event.target.name]: event.target.value, incomeSupper: '0.00' });
+    } else if (event.target.name === 'haveAgedPension') {
+      setValues({ ...values, [event.target.name]: event.target.value, incomeAgedPension: '0.00' });
+    } else {
+      setValues({ ...values, [event.target.name]: event.target.value });
+    }
   };
 
   const next = (event) => {
@@ -94,7 +108,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       show: values.haveWork === '1',
     },
     {
-      label: 'Do you have superannuation?',
+      label: 'Do you receive superannuation?',
       name: 'haveSuper',
       type: 'radio',
       onChange: handleChange,
@@ -111,7 +125,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       ],
     },
     {
-      label: 'How much do you receive from super on a weekly basis?',
+      label: 'How much per week?',
       name: 'incomeSuper',
       type: 'currencyInput',
       value: values.incomeSuper,
@@ -136,7 +150,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       ],
     },
     {
-      label: 'How much do you receive from aged pension or others on a weekly basis?',
+      label: 'How much per week?',
       name: 'incomeAgedPension',
       type: 'currencyInput',
       value: values.incomeAgedPension,
@@ -212,17 +226,36 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
     },
   ];
 
+  const disableSubmit = () => {
+    console.log('values', values);
+    if (values.haveWork.length === 0) return true;
+    if (values.haveWork === '1' && values.incomeWork === '0.00') return true;
+    if (values.haveSuper.length === 0) return true;
+    if (values.haveSuper === '1' && values.incomeSupper === '0.00') return true;
+    if (values.haveAgedPension.length === 0) return true;
+    if (values.haveAgedPension === '1' && values.incomeAgedPension === '0.00') return true;
+    if (values.haveFamilySupport.length === 0) return true;
+    if (values.inDebt.length === 0) return true;
+    if (isRenting && values.payForRent === 0) return true;
+    if (haveLoanOrMortgage && values.payForLoanOrMortgage === 0) return true;
+  };
+
   return (
     <Container component="main" maxWidth="sm">
-      <CssBaseline />
       <div className={classes.paper}>
         <CustomTitle title="Financial" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
-          <Button type="submit" fullWidth variant="contained" className={classes.submit}>
+          <Button
+            type="submit"
+            disabled={disableSubmit()}
+            fullWidth
+            variant="contained"
+            className={classes.submit}
+          >
             Next
           </Button>
-          <Button onClick={() => goBack()} className={classes.submit}>
+          <Button onClick={() => goBack()} className={classes.backButton}>
             Back
           </Button>
         </form>
