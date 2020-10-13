@@ -37,8 +37,13 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   backButton: {
+    margin: theme.spacing(3, 0, 2),
     backgroundColor: 'grey',
     color: 'black',
+  },
+  buttonsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 }));
 
@@ -126,23 +131,24 @@ function Housing({ onSubmit, state }) {
   ];
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <div className={classes.paper}>
         <CustomTitle title="Housing" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            className={classes.submit}
-            disabled={disableSubmit()}
-          >
-            Next
-          </Button>
-          <Button onClick={() => goBack()} className={classes.backButton}>
-            Back
-          </Button>
+          <div className={classes.buttonsContainer}>
+            <Button onClick={() => goBack()} className={classes.backButton}>
+              Back
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.submit}
+              disabled={disableSubmit()}
+            >
+              Next
+            </Button>
+          </div>
         </form>
       </div>
     </Container>

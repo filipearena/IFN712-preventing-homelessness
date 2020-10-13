@@ -1,20 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
-import { saveState } from '../actions';
-import CustomRadioGroup from '../components/CustomRadioGroup';
-import CustomCheckbox from '../components/CustomCheckbox';
-import CustomTextField from '../components/CustomTextField';
-import CustomHelperLink from '../components/CustomHelperLink';
 import CustomTitle from '../components/CustomTitle';
-import FormGenerator from '../components/FormGenerator';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -67,12 +57,4 @@ function Home({ onSubmit, state }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    state,
-  };
-};
-
-export default connect(mapStateToProps, {
-  // onSubmit: saveState,
-})(Home);
+export default Home;

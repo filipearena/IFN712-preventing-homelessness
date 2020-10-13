@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
   backButton: {
     backgroundColor: 'grey',
     color: 'black',
+    margin: theme.spacing(3, 0, 2),
+  },
+  buttonsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 }));
 
@@ -170,23 +175,24 @@ function Legal({ onSubmit, state }) {
   ];
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <div className={classes.paper}>
         <CustomTitle title="Legal" />
         <form className={classes.form} onSubmit={next}>
           <FormGenerator form={Form} />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            className={classes.submit}
-            disabled={disableSubmit()}
-          >
-            Next
-          </Button>
-          <Button onClick={() => goBack()} className={classes.backButton}>
-            Back
-          </Button>
+          <div className={classes.buttonsContainer}>
+            <Button onClick={() => goBack()} className={classes.backButton}>
+              Back
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.submit}
+              disabled={disableSubmit()}
+            >
+              Next
+            </Button>
+          </div>
         </form>
       </div>
     </Container>
