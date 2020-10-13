@@ -56,6 +56,8 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
     inDebt: state.questionnaire.inDebt || '',
     payForRent: state.questionnaire.payForRent || '0.00',
     payForLoanOrMortgage: state.questionnaire.payForLoanOrMortgage || '0.00',
+    incomePercentageSpentOnRent: state.questionnaire.incomePercentageSpentOnRent || '0.00',
+    incomePercentageSpentOnMortgage: state.questionnaire.incomePercentageSpentOnMortgage || '0.00',
   });
 
   const handleChange = (event) => {
@@ -72,20 +74,28 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
 
   const next = (event) => {
     event.preventDefault();
-    if (isRenting) {
+    if (isRenting || haveLoanOrMortgage) {
       const totalIncome =
         parseInt(values.incomeWork, 10) +
         parseInt(values.incomeSupper, 10) +
         parseInt(values.incomeAgedPension, 10);
-      console.log('totalIncome', totalIncome);
-      const incomeSpentOnRent = values.payForRent / totalIncome;
-      console.log('incomeSpentOnRent', incomeSpentOnRent);
-      setValues({
-        ...values,
-        incomeSpentOnRent,
-      });
+      if (isRenting) {
+        const incomePercentageSpentOnRent = values.payForRent / totalIncome;
+        onPersistData({
+          ...values,
+          incomePercentageSpentOnRent: incomePercentageSpentOnRent.toFixed(2),
+        });
+      }
+      if (haveLoanOrMortgage) {
+        const incomePercentageSpentOnMortgage = values.payForLoanOrMortgage / totalIncome;
+        onPersistData({
+          ...values,
+          incomePercentageSpentOnMortgage: incomePercentageSpentOnMortgage.toFixed(2),
+        });
+      }
+    } else {
+      onPersistData(values);
     }
-    onPersistData(values);
     history.push('/legal');
   };
 
