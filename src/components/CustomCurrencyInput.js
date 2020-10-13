@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   // },
 }));
 
-function CustomCurrencyInput({ name, id, label, onChange, isRequired }) {
+function CustomCurrencyInput({ name, id, label, onChange, isRequired, value }) {
   const classes = useStyles();
   return (
     <Box style={{ marginBottom: 15, justifyContent: 'flex-end', width: '50%' }}>
@@ -20,6 +20,7 @@ function CustomCurrencyInput({ name, id, label, onChange, isRequired }) {
         label={label}
         id={id}
         required={isRequired}
+        value={value}
         name={name}
         fullWidth
         textAlign="left"

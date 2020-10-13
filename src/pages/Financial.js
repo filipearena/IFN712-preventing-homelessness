@@ -72,9 +72,21 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
 
   const next = (event) => {
     event.preventDefault();
-    // TODO: CALCULATE HOW MUCH PERSON IS SPENDING ON HOUSING FROM INCOME
+    if (isRenting) {
+      const totalIncome =
+        parseInt(values.incomeWork, 10) +
+        parseInt(values.incomeSupper, 10) +
+        parseInt(values.incomeAgedPension, 10);
+      console.log('totalIncome', totalIncome);
+      const incomeSpentOnRent = values.payForRent / totalIncome;
+      console.log('incomeSpentOnRent', incomeSpentOnRent);
+      setValues({
+        ...values,
+        incomeSpentOnRent,
+      });
+    }
     onPersistData(values);
-    history.push('/relationship');
+    history.push('/legal');
   };
 
   const goBack = () => {
@@ -126,9 +138,9 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
     },
     {
       label: 'How much per week?',
-      name: 'incomeSuper',
+      name: 'incomeSupper',
       type: 'currencyInput',
-      value: values.incomeSuper,
+      value: values.incomeSupper,
       onChange: handleChange,
       show: values.haveSuper === '1',
     },
@@ -209,7 +221,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       ],
     },
     {
-      label: 'How much money do you pay for rent?',
+      label: 'How much do you pay for rent per week?',
       name: 'payForRent',
       type: 'currencyInput',
       onChange: handleChange,
@@ -227,7 +239,6 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
   ];
 
   const disableSubmit = () => {
-    console.log('values', values);
     if (values.haveWork.length === 0) return true;
     if (values.haveWork === '1' && values.incomeWork === '0.00') return true;
     if (values.haveSuper.length === 0) return true;
