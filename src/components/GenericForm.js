@@ -1,11 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from 'react-router-dom';
-import { saveState } from '../actions';
 import CustomTitle from './CustomTitle';
 import FormGenerator from './FormGenerator';
 
@@ -74,12 +72,4 @@ function GenericForm({ title, form, next, disableSubmit }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    state,
-  };
-};
-
-export default connect(mapStateToProps, {
-  onSubmit: saveState,
-})(GenericForm);
+export default GenericForm;
