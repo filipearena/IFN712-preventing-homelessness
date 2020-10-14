@@ -7,8 +7,13 @@ export const saveState = (newFields) => (dispatch, getState) => {
   const links = [];
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < keys.length; i++) {
-    if (valueToLink[keys[i]] && [newFields[keys[i]]]) {
-      links.push(valueToLink[keys[i]][newFields[keys[i]]]);
+    if (
+      valueToLink[keys[i]] &&
+      [newFields[keys[i]]] !== undefined &&
+      valueToLink[keys[i]][newFields[keys[i]]] !== undefined
+    ) {
+      console.log('pushing', valueToLink[keys[i]][newFields[keys[i]]]);
+      links.push(...valueToLink[keys[i]][newFields[keys[i]]]);
     }
   }
 
@@ -19,7 +24,7 @@ export const saveState = (newFields) => (dispatch, getState) => {
 
   dispatch({
     type: types.UPDATE_LINKS,
-    newLinks: links[0],
+    newLinks: links,
   });
 };
 
