@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Resources({ onClearState, links }) {
+function Resources({ onClearState, links, state }) {
   const history = useHistory();
   const classes = useStyles();
 
@@ -36,19 +36,20 @@ function Resources({ onClearState, links }) {
   };
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="md">
       <Paper className={classes.paper}>
         <CustomTitle title="Resources" />
-        <span>Here are some links you might find usefull:</span>
+        {(state.questionnaire.incomePercentageSpentOnRent > '0.30' ||
+          state.questionnaire.incomePercentageSpentOnMortgage > '0.30') && (
+          <span style={{ margin: '15px 10px', color: 'red' }}>
+            Warning: You are spending more than 30% or your total income on housing. For more
+            information on how to change this situation, refer to the links below:
+          </span>
+        )}
         {links.map((link) => {
           return <CustomHelperLink key={Math.random()} link={link} message={link} />;
         })}
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={() => goToAssessment()}
-          className={classes.button}
-        >
+        <Button variant="contained" onClick={() => goToAssessment()} className={classes.button}>
           Redo Assessment
         </Button>
       </Paper>
