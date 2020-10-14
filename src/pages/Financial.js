@@ -17,6 +17,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
+    padding: '25px 40px 15px 40px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
