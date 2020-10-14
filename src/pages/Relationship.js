@@ -10,11 +10,14 @@ function RelationShip({ onSubmit, state }) {
   const [values, setValues] = React.useState({
     single: state.questionnaire.single || '',
     partnerHelps: state.questionnaire.partnerHelps || '',
+    partnerIncome: state.questionnaire.partnerIncome || '0.00',
   });
 
   const handleChange = (event) => {
     if (event.target.name === 'single') {
-      setValues({ [event.target.name]: event.target.value, partnerHelps: '' });
+      setValues({ ...values, [event.target.name]: event.target.value, partnerHelps: '' });
+    } else if (event.target.name === 'partnerHelps') {
+      setValues({ ...values, [event.target.name]: event.target.value, partnerIncome: '0.00' });
     } else {
       setValues({ ...values, [event.target.name]: event.target.value });
     }
@@ -23,6 +26,9 @@ function RelationShip({ onSubmit, state }) {
   const disableSubmit = () => {
     if (values.single === '0') {
       return values.partnerHelps.length === 0;
+    }
+    if (values.partnerHelps === '1') {
+      return values.partnerIncome.length === '0.00';
     }
     return values.single.length === 0;
   };
@@ -65,6 +71,14 @@ function RelationShip({ onSubmit, state }) {
         { value: '0', label: 'No' },
       ],
       show: values.single === '0',
+    },
+    {
+      label: 'What is his weekly income?',
+      name: 'partnerIncome',
+      type: 'currencyInput',
+      value: values.partnerIncome,
+      onChange: handleChange,
+      show: values.partnerHelps === '1',
     },
   ];
 

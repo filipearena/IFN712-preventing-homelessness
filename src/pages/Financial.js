@@ -45,7 +45,8 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       const totalIncome =
         parseInt(values.incomeWork, 10) +
         parseInt(values.incomeSupper, 10) +
-        parseInt(values.incomeAgedPension, 10);
+        parseInt(values.incomeAgedPension, 10) +
+        parseInt(state.questionnaire.partnerIncome, 10);
       if (isRenting) {
         const incomePercentageSpentOnRent = values.payForRent / totalIncome;
         onPersistData({

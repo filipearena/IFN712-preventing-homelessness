@@ -1,7 +1,11 @@
 html, body {
   background: rgba(137, 43, 226);
   /* background: rgb(39, 39, 204) */
-  font-size: 20px
+  font-size: 25px !important;
+}
+
+label {
+  font-size: 25px !important;
 }
 
 
