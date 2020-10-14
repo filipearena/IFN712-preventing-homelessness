@@ -38,6 +38,7 @@ function Resources({ onClearState, links }) {
     <Container component="main" maxWidth="sm">
       <Paper className={classes.paper}>
         <CustomTitle title="Resources" />
+        <span>Here are some links you might find usefull on your current situation:</span>
         {links.map((link) => {
           return <CustomHelperLink key={Math.random()} link={link} message={link} />;
         })}
