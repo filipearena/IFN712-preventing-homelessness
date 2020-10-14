@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'blue',
+    backgroundColor: 'rgb(39,39,200)',
     color: 'white',
   },
   backButton: {
-    backgroundColor: 'grey',
+    backgroundColor: '#ccc',
     color: 'black',
     margin: theme.spacing(3, 0, 2),
   },
@@ -48,7 +48,7 @@ function GenericForm({ title, form, next, disableSubmit }) {
   };
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="md">
       <Paper className={classes.paper}>
         <CustomTitle title={title} />
         <form className={classes.form} onSubmit={next}>
