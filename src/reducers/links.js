@@ -11,4 +11,7 @@ export const links = createReducer(initialState, {
     const final = temp.filter((item, pos) => temp.indexOf(item) === pos);
     return final;
   },
+  [types.CLEAR_STATE]() {
+    return initialState;
+  },
 });

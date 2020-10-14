@@ -11,4 +11,7 @@ export const questionnaire = createReducer(initialState, {
       ...newFields,
     };
   },
+  [types.CLEAR_STATE]() {
+    return initialState;
+  },
 });
