@@ -1,54 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import { saveState } from '../actions';
-// import CustomHelperLink from '../components/CustomHelperLink';
-import CustomTitle from '../components/CustomTitle';
-import FormGenerator from '../components/FormGenerator';
+import GenericForm from '../components/GenericForm';
 import {
   makeSelectIsRenting,
   makeSelectHaveLoanOrMortage,
 } from '../reducers/selectors/questionnaire';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    padding: '25px 40px 15px 40px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'blue',
-    color: 'white',
-  },
-  backButton: {
-    backgroundColor: 'grey',
-    color: 'black',
-    margin: theme.spacing(3, 0, 2),
-  },
-  buttonsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-}));
-
 function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
   const history = useHistory();
-  const classes = useStyles();
 
   const [values, setValues] = React.useState({
     haveWork: state.questionnaire.haveWork || '',
@@ -103,10 +64,6 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       onPersistData(values);
     }
     history.push('/legal');
-  };
-
-  const goBack = () => {
-    history.goBack();
   };
 
   const Form = [
@@ -267,29 +224,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
     if (haveLoanOrMortgage && values.payForLoanOrMortgage === 0) return true;
   };
 
-  return (
-    <Container component="main" maxWidth="sm">
-      <div className={classes.paper}>
-        <CustomTitle title="Financial" />
-        <form className={classes.form} onSubmit={next}>
-          <FormGenerator form={Form} />
-          <div className={classes.buttonsContainer}>
-            <Button onClick={() => goBack()} className={classes.backButton}>
-              Back
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              className={classes.submit}
-              disabled={disableSubmit()}
-            >
-              Next
-            </Button>
-          </div>
-        </form>
-      </div>
-    </Container>
-  );
+  return <GenericForm form={Form} title="Financial" next={next} disableSubmit={disableSubmit} />;
 }
 
 const mapStateToProps = (state) => {

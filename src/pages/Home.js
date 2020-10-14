@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
@@ -9,18 +9,19 @@ import CustomTitle from '../components/CustomTitle';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
+    padding: '25px 40px 15px 40px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  submit: {
+  button: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: 'blue',
     color: 'white',
   },
 }));
 
-function Home({ onSubmit, state }) {
+function Home() {
   const history = useHistory();
   const classes = useStyles();
 
@@ -34,13 +35,13 @@ function Home({ onSubmit, state }) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+      <Paper className={classes.paper}>
         <CustomTitle title="Welcome" />
         <Button
           fullWidth
           variant="contained"
           onClick={() => needHelpNow()}
-          className={classes.submit}
+          className={classes.button}
         >
           I Need Help Now
         </Button>
@@ -48,11 +49,11 @@ function Home({ onSubmit, state }) {
           fullWidth
           variant="contained"
           onClick={() => goToAssessment()}
-          className={classes.submit}
+          className={classes.button}
         >
           Proceed with Assessment
         </Button>
-      </div>
+      </Paper>
     </Container>
   );
 }

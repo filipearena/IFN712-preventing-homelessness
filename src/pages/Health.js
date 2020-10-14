@@ -1,56 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import { saveState } from '../actions';
-import CustomRadioGroup from '../components/CustomRadioGroup';
-import CustomCheckbox from '../components/CustomCheckbox';
-import CustomTextField from '../components/CustomTextField';
-import CustomHelperLink from '../components/CustomHelperLink';
-import CustomTitle from '../components/CustomTitle';
-import FormGenerator from '../components/FormGenerator';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    padding: '25px 40px 15px 40px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'blue',
-    color: 'white',
-  },
-  backButton: {
-    backgroundColor: 'grey',
-    color: 'black',
-    margin: theme.spacing(3, 0, 2),
-  },
-  buttonsContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-}));
+import GenericForm from '../components/GenericForm';
 
 function Health({ onSubmit, state }) {
   const history = useHistory();
-  const classes = useStyles();
 
   const [values, setValues] = React.useState({
     illness: state.questionnaire.illness || '',
@@ -65,12 +20,8 @@ function Health({ onSubmit, state }) {
   const next = (event) => {
     event.preventDefault();
     onSubmit(values);
-
+    // TODO: GO TO RESOURCES
     // history.push('/health');
-  };
-
-  const goBack = () => {
-    history.goBack();
   };
 
   const disableSubmit = () => {
@@ -136,29 +87,7 @@ function Health({ onSubmit, state }) {
     },
   ];
 
-  return (
-    <Container component="main" maxWidth="sm">
-      <div className={classes.paper}>
-        <CustomTitle title="Health" />
-        <form className={classes.form} onSubmit={next}>
-          <FormGenerator form={Form} />
-          <div className={classes.buttonsContainer}>
-            <Button onClick={() => goBack()} className={classes.backButton}>
-              Back
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              className={classes.submit}
-              disabled={disableSubmit()}
-            >
-              Next
-            </Button>
-          </div>
-        </form>
-      </div>
-    </Container>
-  );
+  return <GenericForm form={Form} title="Health" next={next} disableSubmit={disableSubmit} />;
 }
 
 const mapStateToProps = (state) => {
