@@ -12,8 +12,7 @@ import Resources from './pages/Resources';
 const App = () => {
   return (
     <Switch>
-      <Redirect exact path="/" to={APP_ROUTES.home} />
-      <Route path={APP_ROUTES.home} exact component={Home} />
+      <Route path="/" exact component={Home} />
       <Route path={APP_ROUTES.housing} exact component={Housing} />
       <Route path={APP_ROUTES.relationship} exact component={Relationship} />
       <Route path={APP_ROUTES.financial} exact component={Financial} />

@@ -10,6 +10,7 @@ import FormGenerator from './FormGenerator';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(8),
     padding: '25px 40px 15px 40px',
     display: 'flex',
     flexDirection: 'column',
