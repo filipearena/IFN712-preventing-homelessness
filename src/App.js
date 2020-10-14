@@ -19,6 +19,7 @@ const App = () => {
       <Route path={APP_ROUTES.legal} exact component={Legal} />
       <Route path={APP_ROUTES.health} exact component={Health} />
       <Route path={APP_ROUTES.resources} exact component={Resources} />
+      <Redirect to="/" />
     </Switch>
   );
 };
