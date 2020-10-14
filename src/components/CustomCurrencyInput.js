@@ -29,7 +29,7 @@ function CustomCurrencyInput({ name, id, label, onChange, isRequired, value }) {
         minimumValue="0"
         outputFormat="string"
         decimalCharacter="."
-        digitGroupSeparator=","
+        digitGroupSeparator=""
         onChange={onChange}
         // className={classes.currencyField}
       />

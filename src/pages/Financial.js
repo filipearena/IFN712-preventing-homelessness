@@ -43,21 +43,19 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
     event.preventDefault();
     if (isRenting || haveLoanOrMortgage) {
       const totalIncome =
-        parseInt(values.incomeWork.replace(/,/g, ''), 10) +
-        parseInt(values.incomeSupper.replace(/,/g, ''), 10) +
-        parseInt(values.incomeAgedPension.replace(/,/g, ''), 10) +
-        parseInt(state.questionnaire.partnerIncome.replace(/,/g, ''), 10);
+        parseInt(values.incomeWork, 10) +
+        parseInt(values.incomeSupper, 10) +
+        parseInt(values.incomeAgedPension, 10) +
+        parseInt(state.questionnaire.partnerIncome, 10);
       if (isRenting) {
-        const incomePercentageSpentOnRent =
-          parseInt(values.payForRent.replace(/,/g, '')) / totalIncome;
+        const incomePercentageSpentOnRent = parseInt(values.payForRent) / totalIncome;
         onPersistData({
           ...values,
           incomePercentageSpentOnRent: incomePercentageSpentOnRent.toFixed(2) >= '0.30' ? '1' : '0',
         });
       }
       if (haveLoanOrMortgage) {
-        const incomePercentageSpentOnMortgage =
-          parseInt(values.payForLoanOrMortgage.replace(/,/g, '')) / totalIncome;
+        const incomePercentageSpentOnMortgage = parseInt(values.payForLoanOrMortgage) / totalIncome;
         onPersistData({
           ...values,
           incomePercentageSpentOnMortgage:
@@ -199,7 +197,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       ],
     },
     {
-      label: 'How much do you pay for rent per week?',
+      label: 'How much do you pay for for your acommodation per week?',
       name: 'payForRent',
       type: 'currencyInput',
       onChange: handleChange,

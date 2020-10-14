@@ -49,7 +49,7 @@ function Housing({ onSubmit, state }) {
         },
         {
           value: '2',
-          label: "I'm renting",
+          label: "I'm paying to use it (rental/hotel/shared accomodation etc)",
         },
         {
           value: '3',
@@ -61,7 +61,11 @@ function Housing({ onSubmit, state }) {
         },
         {
           value: '5',
-          label: "I'm staying in temporary accomodation",
+          label: "I'm staying in a government temporary accomodation",
+        },
+        {
+          value: '6',
+          label: 'Other',
         },
       ],
     },

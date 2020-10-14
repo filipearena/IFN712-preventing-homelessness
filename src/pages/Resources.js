@@ -31,7 +31,7 @@ function Resources({ onClearState, links }) {
 
   const goToAssessment = () => {
     onClearState();
-    history.push('/housing');
+    history.push('/home', null);
     window.scrollTo(0, 0);
   };
 
