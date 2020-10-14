@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "build",
+    "site": "preventing-homelessness",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
