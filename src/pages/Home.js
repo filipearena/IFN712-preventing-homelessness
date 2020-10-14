@@ -34,7 +34,7 @@ function Home() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <Paper className={classes.paper}>
         <CustomTitle title="Welcome" />
         <Button

@@ -51,14 +51,15 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
         const incomePercentageSpentOnRent = values.payForRent / totalIncome;
         onPersistData({
           ...values,
-          incomePercentageSpentOnRent: incomePercentageSpentOnRent.toFixed(2),
+          incomePercentageSpentOnRent: incomePercentageSpentOnRent.toFixed(2) >= '0.30' ? 1 : 0,
         });
       }
       if (haveLoanOrMortgage) {
         const incomePercentageSpentOnMortgage = values.payForLoanOrMortgage / totalIncome;
         onPersistData({
           ...values,
-          incomePercentageSpentOnMortgage: incomePercentageSpentOnMortgage.toFixed(2),
+          incomePercentageSpentOnMortgage:
+            incomePercentageSpentOnMortgage.toFixed(2) >= '0.30' ? 1 : 0,
         });
       }
     } else {

@@ -44,23 +44,23 @@ function Housing({ onSubmit, state }) {
       options: [
         {
           value: '1',
-          label: 'Own a house',
+          label: 'I own my house',
         },
         {
           value: '2',
-          label: 'Renting',
+          label: "I'm renting",
         },
         {
           value: '3',
-          label: 'Staying with friends or family',
+          label: "I'm staying with friends or family",
         },
         {
           value: '4',
-          label: 'Using Supported Residential Service',
+          label: "I'm using Supported Residential Service",
         },
         {
           value: '5',
-          label: 'Staying in temporary accomodation',
+          label: "I'm staying in temporary accomodation",
         },
       ],
     },

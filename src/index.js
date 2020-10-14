@@ -14,9 +14,9 @@ const { store } = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-      <Router>
-        <AppContainer />
-      </Router>
+    <Router>
+      <AppContainer />
+    </Router>
   </Provider>,
 
   document.getElementById('root')

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import { questionnaire } from './questionnaire';
+import { questionnaire, links } from './questionnaire';
 
 export default combineReducers({
   questionnaire,
+  links,
 });
