@@ -43,19 +43,21 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
     event.preventDefault();
     if (isRenting || haveLoanOrMortgage) {
       const totalIncome =
-        parseInt(values.incomeWork, 10) +
-        parseInt(values.incomeSupper, 10) +
-        parseInt(values.incomeAgedPension, 10) +
-        parseInt(state.questionnaire.partnerIncome, 10);
+        parseInt(values.incomeWork.replace(/,/g, ''), 10) +
+        parseInt(values.incomeSupper.replace(/,/g, ''), 10) +
+        parseInt(values.incomeAgedPension.replace(/,/g, ''), 10) +
+        parseInt(state.questionnaire.partnerIncome.replace(/,/g, ''), 10);
       if (isRenting) {
-        const incomePercentageSpentOnRent = values.payForRent / totalIncome;
+        const incomePercentageSpentOnRent =
+          parseInt(values.payForRent.replace(/,/g, '')) / totalIncome;
         onPersistData({
           ...values,
           incomePercentageSpentOnRent: incomePercentageSpentOnRent.toFixed(2) >= '0.30' ? 1 : 0,
         });
       }
       if (haveLoanOrMortgage) {
-        const incomePercentageSpentOnMortgage = values.payForLoanOrMortgage / totalIncome;
+        const incomePercentageSpentOnMortgage =
+          parseInt(values.payForLoanOrMortgage.replace(/,/g, '')) / totalIncome;
         onPersistData({
           ...values,
           incomePercentageSpentOnMortgage:
@@ -66,6 +68,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       onPersistData(values);
     }
     history.push('/legal');
+    window.scrollTo(0, 0);
   };
 
   const Form = [

@@ -10,7 +10,7 @@ function Health({ onSubmit, state }) {
   const [values, setValues] = React.useState({
     illness: state.questionnaire.illness || '',
     drugAbuse: state.questionnaire.drugAbuse || '',
-    lonelyness: state.questionnaire.lonelyness || '',
+    loneliness: state.questionnaire.loneliness || '',
   });
 
   const handleChange = (event) => {
@@ -21,12 +21,13 @@ function Health({ onSubmit, state }) {
     event.preventDefault();
     onSubmit(values);
     history.push('/resources');
+    window.scrollTo(0, 0);
   };
 
   const disableSubmit = () => {
     if (values.illness.length === 0) return true;
     if (values.drugAbuse.length === 0) return true;
-    if (values.lonelyness.length === 0) return true;
+    if (values.loneliness.length === 0) return true;
   };
 
   const Form = [
@@ -67,11 +68,11 @@ function Health({ onSubmit, state }) {
       ],
     },
     {
-      label: 'Are you suffering form depression or lonelyness?',
-      name: 'lonelyness',
+      label: 'Are you suffering form depression or loneliness?',
+      name: 'loneliness',
       type: 'radio',
       onChange: handleChange,
-      value: values.lonelyness,
+      value: values.loneliness,
       required: true,
       options: [
         {

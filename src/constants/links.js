@@ -87,7 +87,7 @@ export const valueToLink = {
   drugAbuse: {
     1: [getLink(25)],
   },
-  lonelyness: {
+  loneliness: {
     1: [getLink(3)],
   },
 };

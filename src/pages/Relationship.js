@@ -37,6 +37,7 @@ function RelationShip({ onSubmit, state }) {
     event.preventDefault();
     onSubmit(values);
     history.push('/financial');
+    window.scrollTo(0, 0);
   };
 
   const Form = [

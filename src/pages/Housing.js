@@ -24,6 +24,7 @@ function Housing({ onSubmit, state }) {
     event.preventDefault();
     onSubmit(values);
     history.push('/relationship');
+    window.scrollTo(0, 0);
   };
 
   const disableSubmit = () => {

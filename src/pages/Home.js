@@ -27,6 +27,7 @@ function Home() {
 
   const goToAssessment = () => {
     history.push('/housing');
+    window.scrollTo(0, 0);
   };
 
   const needHelpNow = () => {

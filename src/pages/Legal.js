@@ -23,6 +23,7 @@ function Legal({ onSubmit, state }) {
     event.preventDefault();
     onSubmit(values);
     history.push('/health');
+    window.scrollTo(0, 0);
   };
 
   const disableSubmit = () => {
