@@ -3,9 +3,9 @@ import { Grid, Link } from '@material-ui/core';
 
 function CustomHelperLink({ link, message }) {
   return (
-    <Grid container>
+    <Grid container style={{ margin: '15px 10px' }}>
       <Grid item xs>
-        <Link target="_blank" href={link} variant="body2">
+        <Link target="_blank" href={link} variant="body2" style={{ fontSize: 15 }}>
           {message}
         </Link>
       </Grid>

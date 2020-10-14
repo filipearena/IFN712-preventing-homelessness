@@ -20,8 +20,7 @@ function Health({ onSubmit, state }) {
   const next = (event) => {
     event.preventDefault();
     onSubmit(values);
-    // TODO: GO TO RESOURCES
-    // history.push('/health');
+    history.push('/resources');
   };
 
   const disableSubmit = () => {

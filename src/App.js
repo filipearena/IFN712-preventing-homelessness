@@ -7,6 +7,7 @@ import Financial from './pages/Financial';
 import Home from './pages/Home';
 import Legal from './pages/Legal';
 import Health from './pages/Health';
+import Resources from './pages/Resources';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path={APP_ROUTES.financial} exact component={Financial} />
       <Route path={APP_ROUTES.legal} exact component={Legal} />
       <Route path={APP_ROUTES.health} exact component={Health} />
+      <Route path={APP_ROUTES.resources} exact component={Resources} />
     </Switch>
   );
 };

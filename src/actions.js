@@ -22,3 +22,9 @@ export const saveState = (newFields) => (dispatch, getState) => {
     newLinks: links[0],
   });
 };
+
+export const clearState = () => (dispatch, getState) => {
+  dispatch({
+    type: types.CLEAR_STATE,
+  });
+};
