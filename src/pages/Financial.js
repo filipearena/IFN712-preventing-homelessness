@@ -163,7 +163,7 @@ function Financial({ onPersistData, isRenting, haveLoanOrMortgage, state }) {
       ],
     },
     {
-      label: 'Are you caring responsibilities for children, or other dependants?',
+      label: 'Do you have children or other dependants?',
       name: 'haveDependants',
       type: 'radio',
       onChange: handleChange,

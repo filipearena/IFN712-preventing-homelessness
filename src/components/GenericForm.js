@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'rgb(39,39,200)',
+    backgroundColor: 'rgb(39,39,200, 0.8)',
     color: 'white',
   },
   backButton: {

@@ -1,7 +1,12 @@
 import { createReducer } from 'redux-create-reducer';
 import * as types from '../types';
 
-const initialState = {};
+const initialState = {
+  // housing: '6',
+  // loan: '',
+  // single: '0',
+  // partnerHelps: '1',
+};
 
 export const questionnaire = createReducer(initialState, {
   [types.UPDATE_QUESTIONNAIRE](state, action) {

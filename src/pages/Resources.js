@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'rgb(39,39,200)',
+    backgroundColor: 'rgb(39,39,200, 0.8)',
     color: 'white',
   },
 }));
@@ -38,7 +38,7 @@ function Resources({ onClearState, links, state }) {
   return (
     <Container component="main" maxWidth="md">
       <Paper className={classes.paper}>
-        <CustomTitle title="Resources" />
+        <CustomTitle title="Here are some resources that might help:" />
         {(state.questionnaire.incomePercentageSpentOnRent > '0.30' ||
           state.questionnaire.incomePercentageSpentOnMortgage > '0.30') && (
           <span style={{ margin: '15px 10px', color: 'red' }}>
@@ -47,10 +47,10 @@ function Resources({ onClearState, links, state }) {
           </span>
         )}
         {links.map((link) => {
-          return <CustomHelperLink key={Math.random()} link={link} message={link} />;
+          return <CustomHelperLink key={Math.random()} link={link.url} message={link.name} />;
         })}
         <Button variant="contained" onClick={() => goToAssessment()} className={classes.button}>
-          Redo Assessment
+          Restart
         </Button>
       </Paper>
     </Container>
