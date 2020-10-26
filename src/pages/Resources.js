@@ -38,17 +38,24 @@ function Resources({ onClearState, links, state }) {
   return (
     <Container component="main" maxWidth="md">
       <Paper className={classes.paper}>
-        <CustomTitle title="Here are some resources that might help:" />
-        {(state.questionnaire.incomePercentageSpentOnRent > '0.30' ||
-          state.questionnaire.incomePercentageSpentOnMortgage > '0.30') && (
-          <span style={{ margin: '15px 10px', color: 'red' }}>
-            Warning: You are spending more than 30% or your total income on housing. For more
-            information on how to change this situation, refer to the links below:
-          </span>
+        {links && links.length > 0 && (
+          <>
+            <CustomTitle title="Here are some resources that might help:" />
+            {(state.questionnaire.incomePercentageSpentOnRent > '0.30' ||
+              state.questionnaire.incomePercentageSpentOnMortgage > '0.30') && (
+              <span style={{ margin: '15px 10px', color: 'red' }}>
+                Warning: You are spending more than 30% or your total income on housing. For more
+                information on how to change this situation, refer to the links below:
+              </span>
+            )}
+            {links.map((link) => {
+              return <CustomHelperLink key={Math.random()} link={link.url} message={link.name} />;
+            })}
+          </>
         )}
-        {links.map((link) => {
-          return <CustomHelperLink key={Math.random()} link={link.url} message={link.name} />;
-        })}
+        {links && links.length === 0 && (
+          <CustomTitle title="Sorry, we didn't find any resources that you might need" />
+        )}
         <Button variant="contained" onClick={() => goToAssessment()} className={classes.button}>
           Restart
         </Button>

@@ -152,15 +152,6 @@ export const valueToLink = {
   partnerHelps: {
     0: [getLink(7)],
   },
-  haveWork: {
-    0: [getLink(7), getLink(8), getLink(10), getLink(15)],
-  },
-  haveSuper: {
-    0: [getLink(7), getLink(8), getLink(10), getLink(15)],
-  },
-  haveAgedPension: {
-    0: [getLink(7), getLink(8), getLink(10), getLink(15)],
-  },
   haveFamilySupport: {
     0: [getLink(7), getLink(3), getLink(2)],
   },
