@@ -35,10 +35,16 @@ function Resources({ onClearState, links, state }) {
     window.scrollTo(0, 0);
   };
 
+  const ownHouseWithoutLoan =
+    state.questionnaire.housing === '1' && state.questionnaire.loan === '0';
   return (
     <Container component="main" maxWidth="md">
       <Paper className={classes.paper}>
-        {links && links.length > 0 && (
+        {/* if person own his own house and didn't take any loan for it */}
+        {(ownHouseWithoutLoan || links?.length === 0) && (
+          <CustomTitle title="Sorry, we didn't find any resources that you might need" />
+        )}
+        {!ownHouseWithoutLoan && links?.length > 0 && (
           <>
             <CustomTitle title="Here are some resources that might help:" />
             {(state.questionnaire.incomePercentageSpentOnRent > '0.30' ||
@@ -52,9 +58,6 @@ function Resources({ onClearState, links, state }) {
               return <CustomHelperLink key={Math.random()} link={link.url} message={link.name} />;
             })}
           </>
-        )}
-        {links && links.length === 0 && (
-          <CustomTitle title="Sorry, we didn't find any resources that you might need" />
         )}
         <Button variant="contained" onClick={() => goToAssessment()} className={classes.button}>
           Restart
